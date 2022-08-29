@@ -41,6 +41,7 @@ const [loadAllEmployees, employeeLoader] = buildLoaders("/api/employees?terminat
 const [loadAllPods, podLoader] = buildLoaders("/api/business_units");
 const [loadAllDepartments, departmentLoader] = buildLoaders("/api/departments");
 const [loadAllSubDepartments, subDepartmentLoader] = buildLoaders("/api/sub_departments");
+const [loadAllLeaveTypes, leaveTypeLoader] = buildLoaders("/api/time_off_types");
 const loadLeaves = (startDate, endDate) => loadAll(`/api/time_offs?start_date=${startDate}&end_date=${endDate}`);
 
 const Date = new GraphQLScalarType({
@@ -108,11 +109,16 @@ const typeDefs = gql`
     cancelled
   }
 
+  type LeaveType {
+    name: String
+  }
+
   type Leave {
     comments: String
     startDate: Date
     endDate: Date
     employee: Employee
+    leaveType: LeaveType
     status: LEAVE_STATUS
   }
 
@@ -122,6 +128,7 @@ const typeDefs = gql`
     departments: [Department]
     subDepartments: [SubDepartment]
     leaves(startDate: Date, endDate: Date): [Leave]
+    leaveTypes: [LeaveType]
   }
 `;
 
@@ -131,7 +138,8 @@ const resolvers = {
     pods: loadAllPods,
     departments: loadAllDepartments,
     subDepartments: loadAllSubDepartments,
-    leaves: (_, {startDate, endDate = startDate}) => loadLeaves(startDate, endDate)
+    leaves: (_, {startDate, endDate = startDate}) => loadLeaves(startDate, endDate),
+    leaveTypes: loadAllLeaveTypes,
   },
   Employee: {
     firstName: ({first_name}) => first_name,
@@ -147,6 +155,7 @@ const resolvers = {
     startDate: ({start_date}) => start_date,
     endDate: ({end_date}) => end_date,
     employee: ({user_id}) => user_id && employeeLoader.load(user_id),
+    leaveType: ({leave_type_id}) => leave_type_id && leaveTypeLoader.load(leave_type_id),
   },
   Date,
 };
@@ -176,5 +185,5 @@ const server = new ApolloServer({
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}/graphql`);
+  console.log(`🚀  Server ready at ${url}graphql`);
 });
