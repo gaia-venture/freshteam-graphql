@@ -1,5 +1,5 @@
 const { GraphQLScalarType, Kind } = require('graphql');
-const { ApolloServer, gql } = require('apollo-server');
+const { ApolloServer, gql, AuthenticationError } = require('apollo-server');
 const DataLoader = require('dataloader')
 const axios = require("axios");
 const parseLinkHeader = require('parse-link-header');
@@ -171,6 +171,13 @@ const server = new ApolloServer({
   resolvers,
   csrfPrevention: true,
   cache: 'bounded',
+  context: ({req}) => {
+    const token = req.headers.authorization || '';
+    if(token != `Bearer ${process.env.TOKEN}`) {
+      throw new AuthenticationError('you must be logged in');
+    }
+    return {};
+  },
   /**
    * What's up with this embed: true option?
    * These are our recommended settings for using AS;
