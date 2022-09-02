@@ -64,6 +64,15 @@ const Date = new GraphQLScalarType({
   },
 });
 
+function matchRegex(string, regex) {
+  const match = string && string.match(regex);
+  if(match) {
+    return match[0];
+  } else {
+    return null;
+  }
+}
+
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
 // your data.
@@ -73,6 +82,7 @@ const typeDefs = gql`
   type Pod {
     name: String
     description: String
+    slackChannel: String
   }
 
   enum EmployeeType {
@@ -158,6 +168,9 @@ const resolvers = {
     leaveType: ({leave_type_id}) => leave_type_id && leaveTypeLoader.load(leave_type_id),
   },
   Date,
+  Pod: {
+    slackChannel: ({description}) => matchRegex(description, /#[^\s]+/)
+  }
 };
 
 const {
