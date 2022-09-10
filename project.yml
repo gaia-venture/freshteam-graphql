@@ -12,6 +12,9 @@ packages:
         runtime: 'nodejs:default'
         web: true
         parameters: {}
-        environment: {}
+        environment:
+          FRESHTEAM_DOMAIN: "${FRESHTEAM_DOMAIN}"
+          FRESHTEAM_TOKEN: "${FRESHTEAM_TOKEN}"
+          TOKEN: "${TOKEN}"
         annotations: {}
         limits: {}
