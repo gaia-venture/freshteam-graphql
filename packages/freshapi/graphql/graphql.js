@@ -186,6 +186,8 @@ const server = new ApolloServer({
   cache: 'bounded',
   context: ({req}) => {
     const token = req.headers.authorization || '';
+    console.log(token);
+    console.log(`Bearer ${process.env.TOKEN}`);
     if(token != `Bearer ${process.env.TOKEN}`) {
       throw new AuthenticationError('you must be logged in');
     }
