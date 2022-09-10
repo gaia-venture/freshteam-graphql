@@ -1,0 +1,17 @@
+environment: {}
+parameters: {}
+packages:
+  - name: freshapi
+    environment: {}
+    parameters: {}
+    annotations: {}
+    functions:
+      - name: graphql
+        binary: false
+        main: ''
+        runtime: 'nodejs:default'
+        web: true
+        parameters: {}
+        environment: {}
+        annotations: {}
+        limits: {}
