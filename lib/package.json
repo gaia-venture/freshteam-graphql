@@ -1,0 +1,19 @@
+{
+  "name": "apollo-freshteam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "apollo-freshteam.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^3.10.2",
+    "axios": "^0.27.2",
+    "dataloader": "^2.1.0",
+    "graphql": "^16.6.0",
+    "parse-link-header": "^2.0.0"
+  }
+}
