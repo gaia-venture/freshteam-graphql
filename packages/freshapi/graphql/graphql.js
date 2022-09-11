@@ -7,7 +7,7 @@ function buildRequest({__ow_method, __ow_body, __ow_headers, __ow_path, __ow_isB
     path: __ow_path,
     headers: __ow_headers,
     body: __ow_body
-            ? (__ow_isBase64Encoded ? Buffer.from(__ow_body, 'base64').toString() : __ow_body)
+            ? {query: __ow_isBase64Encoded ? Buffer.from(__ow_body, 'base64').toString() : __ow_body}
             : body
   }
 }
