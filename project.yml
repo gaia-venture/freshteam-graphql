@@ -9,7 +9,7 @@ packages:
       - name: graphql
         binary: false
         main: ''
-        runtime: 'nodejs:default'
+        runtime: 'nodejs:18'
         web: true
         parameters: {}
         environment:
@@ -17,4 +17,5 @@ packages:
           FRESHTEAM_TOKEN: "${FRESHTEAM_TOKEN}"
           TOKEN: "${TOKEN}"
         annotations: {}
-        limits: {}
+        limits:
+          timeout: 10000

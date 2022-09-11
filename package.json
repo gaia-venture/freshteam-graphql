@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-freshteam": "file:lib"
+    "apollo-freshteam": "file:lib",
+    "apollo-server": "^3.10.2"
   }
 }
