@@ -14,7 +14,7 @@
     "axios": "^0.27.2",
     "dataloader": "^2.1.0",
     "graphql": "^16.6.0",
-    "parse-link-header": "^2.0.0",
+    "range": "^0.0.3",
     "snake-case": "^3.0.4"
   }
 }
